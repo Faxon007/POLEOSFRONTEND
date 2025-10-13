@@ -1,0 +1,52 @@
+.item {
+
+  ion-icon {
+    pointer-events: none;
+  }
+
+  ion-icon,
+  svg,
+  span {
+    color: var(--ion-color-dark);
+  }
+
+  &.selected {
+    background: rgba(var(--ion-color-primary-rgb), 0.14);
+
+    span {
+      color: var(--ion-color-primary) !important;
+      font-weight: bold;
+    }
+
+    ion-icon {
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+.sidenav-item {
+  .submenu {
+    position: absolute;
+    left: 85%;
+    top: -10px;
+    margin-top: 0;
+    padding: 10px 20px;
+    border-radius: 0 6px 6px 0;
+    opacity: 0;
+    display: block;
+    pointer-events: none;
+    transition: 0s;
+  }
+
+  &:hover {
+    .submenu {
+      top: -10px;
+      opacity: 1;
+      margin-top: 0;
+      padding: 10px 20px;
+      pointer-events: auto;
+      transition: all 0.4s ease;
+      width: auto;
+    }
+  }
+}

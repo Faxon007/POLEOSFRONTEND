@@ -1,0 +1,28 @@
+.accordion-button::after {
+	background-image: none;
+}
+
+// * Para aplicar color rojo unicamente a los iconos del acordeón
+button ion-icon {
+	color: red;
+}
+
+ion-checkbox {
+	--size: 16px;
+	--background-checked: red;
+}
+
+ion-checkbox::part(container) {
+	border-radius: 4px;
+	border: 2px solid red;
+}
+
+.itemCheckbox {
+	// --padding: 0px;
+	--background: none;
+	height: 30px;
+}
+
+.accordion-button:not(.collapsed) {
+	box-shadow: none;
+}

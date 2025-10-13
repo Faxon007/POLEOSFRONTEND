@@ -1,0 +1,113 @@
+<div class="w-full">
+  <app-header class="" title="Bitacoras"></app-header>
+  <div class="min-h-screen flex-col h-screen px-5 md:px-10 pb-11 mt-[50px] sm:mt-0 w-full flex claro-oym-scroll overflow-x-hidden overflow-y-auto flex-1 scroll-smooth">
+
+    <section class="w-full h-fit flex flex-col mb-4">
+      <div class="flex md:flex-row flex-col w-full md:justify-between justify-center md:items-end items-center md:h-[80px] h-auto">
+        <div class="flex md:flex-row flex-col w-full items-end">
+          <app-search [(value)]="search" placeholder="Buscar" (valueChange)="getBitacoras()"></app-search>
+        </div>
+        <div class="flex md:w-[200px] w-full md:mr-4 mr-0">
+          <app-input-search-multiple 
+            class="md:w-[200px] w-full" 
+            label="Estados" 
+            klass="secondary"
+            klassContent="w-[200px]" 
+            [options]="[
+              { label: 'Activo', value: 'Activo' }, 
+              { label: 'Dado de baja', value: 'Dado de baja' }
+            ]"
+            placeholder="Selecciona estados">
+          </app-input-search-multiple>
+        </div>
+        <div class="flex md:w-[200px] w-full md:mr-4 mr-0">
+          <app-input-search-multiple 
+            class="md:w-[200px] w-full" 
+            label="Usuarios" 
+            klass="secondary"
+            klassContent="w-[200px]" 
+            [options]="[
+              { label: 'jose manuel', value: 'jose manuel' }, 
+              { label: 'julio lopez', value: 'julio lopez' }, 
+              { label: 'prueba001', value: 'prueba001' }
+            ]"
+            placeholder="Selecciona usuarios">
+          </app-input-search-multiple>
+        </div>
+
+        <div class="flex md:flex-row flex-col w-full items-end space-x-2 mt-2">
+          <ion-item class="calendar-input" mode="md" lines="none">
+            <ion-label position="stacked" class="calendar-label">Inicio</ion-label>
+            <ion-datetime-button datetime="startDate" class="calendar-button"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime
+                  id="startDate"
+                  [(ngModel)]="startDate"
+                  presentation="date"
+                  displayFormat="dd/MM/yyyy"
+                ></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+
+          <ion-item class="calendar-input" mode="md" lines="none">
+            <ion-label position="stacked" class="calendar-label">Fin</ion-label>
+            <ion-datetime-button datetime="endDate" class="calendar-button"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime
+                  id="endDate"
+                  [(ngModel)]="endDate"
+                  presentation="date"
+                  displayFormat="dd/MM/yyyy"
+                ></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+
+          <app-button
+            class="md:w-[150px] w-full mt-4 md:mt-6"
+            title="Filtrar"
+            klass="primary large"
+            (click)="filterByDate()"
+          ></app-button>
+
+          <app-button
+            class="md:w-[150px] w-full mt-4 md:mt-6"
+            title="Reset"
+            klass="secondary large"
+            (click)="resetFilters()"
+          ></app-button>
+            <app-button
+            class="md:w-[150px] w-full mt-4 md:mt-6"
+            title="Exportar a Excel"
+            klass="primary large"
+            (click)="exportToCsv()"
+  ></app-button>
+        </div>
+      </div>
+    </section>
+
+
+    <ag-grid-angular
+  #grid
+  class="ag-theme-alpine custom-red w-full"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="defaultColDef"
+  [animateRows]="true"
+  [pagination]="true"
+  [paginationPageSize]="limit"
+  style="height: 600px;">
+  <ng-template #detalleCell let-data="data">
+    <app-button
+      title="Ver detalle"
+      klass="primary small"
+      (click)="openBitacoraModal(data, 'view')"
+    ></app-button>
+  </ng-template>
+</ag-grid-angular>
+
+  </div>
+</div>

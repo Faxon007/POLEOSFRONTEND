@@ -1,0 +1,6 @@
+<app-sidemenu [isAuthenticated]="!isAuthenticated"> </app-sidemenu>
+<!-- [class]="sideMenuStore.sidemenuValue.show ? 'sm:ml-[320px]' : 'sm:ml-[80px]'" -->
+<ion-router-outlet [class]="sideMenuStore.sidemenuValue.show ? 'sm:ml-[80px]' : 'sm:ml-[0px]'"
+  class="transition-all duration-500 ease-in-out flex flex-col px-6 min-h-screen min-w[0px] overflow-hidden ml-[80px] "
+  [animated]="false" id="main-content">
+</ion-router-outlet>

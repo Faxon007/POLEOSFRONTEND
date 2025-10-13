@@ -1,0 +1,53 @@
+<div class="claro-oym-dropdown w-full" [class]="klass">
+	<ion-item
+		#inputElem
+		class=""
+		mode="md"
+		lines="none"
+		(click)="onClick($event)"
+	>
+		<ion-label position="stacked">{{ label ? label : '' }}</ion-label>
+		<div class="input hover:cursor-pointer">
+			<ion-input
+				class="pointer"
+				[readonly]="readonly"
+				[placeholder]="placeholder"
+				[type]="type"
+				[name]="name"
+				[(ngModel)]="textDisplay"
+				(ngModelChange)="handleChange($event)"
+				[required]="required"
+			>
+			</ion-input>
+			<span class="icon cursor-pointer" item-end>
+				<ion-icon
+					[name]="
+						!open ? 'chevron-down-outline' : 'chevron-up-outline'
+					"
+				></ion-icon>
+			</span>
+		</div>
+	</ion-item>
+
+	<div *ngIf="open" class="flex flex-col items" [ngClass]="klassContent">
+		<div
+			[hidden]="!options.length"
+			class="flex h-[44px] hover:bg-primary-item items-center p-2 hover:cursor-pointer"
+			(click)="selectOption(option)"
+			*ngFor="let option of options"
+			[class]="selectedOption(option) ? 'bg-primary-item' : ''"
+		>
+			<p class="text-[12px]">{{ option.label }}</p>
+		</div>
+		<div
+			*ngIf="!options.length"
+			class="flex justify-center items-center p-8 flex-col"
+		>
+			<ion-icon
+				class="text-primary mb-2 text-3xl"
+				name="sad-outline"
+			></ion-icon>
+			<p class="text-[13px]">¡No hay opciones!</p>
+		</div>
+	</div>
+</div>

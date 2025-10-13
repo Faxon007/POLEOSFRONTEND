@@ -1,0 +1,21 @@
+<div class="bg-light m-8 sm:w-[600px]">
+	<header class="text-center">
+		<img
+			src="./assets/img/logo.png"
+			alt="Logo de claro"
+			class="w-36 left-0 right-0 m-auto mb-3"
+		/>
+		<h1 class="text-3xl text-primary mb-2 break-words font-bold">
+			{{ rotule }}
+		</h1>
+		<p>
+			<ng-content> </ng-content>
+		</p>
+	</header>
+	<app-button
+		class="md:w-[200px] w-full m-2"
+		klass="primary"
+		title="¡Entendido!"
+		(clicked)="clickButton()"
+	></app-button>
+</div>

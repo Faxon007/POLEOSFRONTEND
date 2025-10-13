@@ -1,0 +1,126 @@
+<ion-content>
+  <div class="w-full h-full p-4">
+    <div class="flex items-center flex-col">
+      <div class="flex items-center justify-end w-full">
+        <ion-button
+          class="close-button"
+          color="medium"
+          shape="round"
+          fill="solid"
+          (click)="cancel()"
+        >
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-button>
+      </div>
+      <h2 class="text-3xl font-bold text-primary text-center">
+        {{ type == 'create' ? 'Crear' : 'Editar' }} Ejecución
+      </h2>
+    </div>
+
+    <form
+      #form="ngForm"
+      class="px-8"
+      id="form-execution"
+      (ngSubmit)="form.valid ? saveExecution() : null"
+    >
+      <!-- Campo País obligatorio -->
+      <ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+        <ion-label position="stacked">País</ion-label>
+        <ion-select
+          [(ngModel)]="execution.country"
+          name="country"
+          interface="alert"
+          placeholder="Seleccionar país"
+          required
+        >
+          <ion-select-option value="GT">GT</ion-select-option>
+          <ion-select-option value="SV">SV</ion-select-option>
+          <ion-select-option value="HN">HN</ion-select-option>
+          <ion-select-option value="NI">NI</ion-select-option>
+          <ion-select-option value="CR">CR</ion-select-option>
+          <ion-select-option value="IMS_SIXBEL">IMS_SIXBEL</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+        <ion-label position="stacked">Frecuencia</ion-label>
+        <ion-select
+          [(ngModel)]="execution.frequency"
+          name="frequency"
+          interface="alert"
+          placeholder="Seleccionar frecuencia"
+          required
+        >
+          <ion-select-option value="DIARIA">DIARIA</ion-select-option>
+          <ion-select-option value="SEMANAL">SEMANAL</ion-select-option>
+          <ion-select-option value="MENSUAL">MENSUAL</ion-select-option>
+          <ion-select-option value="ANUAL">ANUAL</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="execution.frequency === 'SEMANAL'">
+        <ion-label position="stacked">Día de la semana</ion-label>
+        <ion-select
+          [(ngModel)]="execution.weekDay"
+          name="weekDay"
+          interface="alert"
+          placeholder="Seleccionar día"
+        >
+          <ion-select-option [value]="1">Lunes</ion-select-option>
+          <ion-select-option [value]="2">Martes</ion-select-option>
+          <ion-select-option [value]="3">Miércoles</ion-select-option>
+          <ion-select-option [value]="4">Jueves</ion-select-option>
+          <ion-select-option [value]="5">Viernes</ion-select-option>
+          <ion-select-option [value]="6">Sábado</ion-select-option>
+          <ion-select-option [value]="0">Domingo</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+        <ion-label position="stacked">Inicio y hora de ejecución</ion-label>
+        <ion-datetime
+          display-format="DD/MM/YYYY HH:mm"
+          picker-format="DD/MM/YYYY HH:mm"
+          [(ngModel)]="execution.startDateForPicker"
+          name="startDate"
+          required
+        >
+        </ion-datetime>
+      </ion-item>
+
+      <ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+        <ion-label position="stacked">Estado</ion-label>
+        <ion-select
+          [(ngModel)]="execution.status"
+          name="status"
+          interface="alert"
+          placeholder="Seleccionar estado"
+          required
+        >
+          <ion-select-option value="ACTIVO">ACTIVO</ion-select-option>
+          <ion-select-option value="INACTIVO">INACTIVO</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="flex mt-8 items-center justify-evenly pb-4">
+        <app-button
+          class="w-[200px] mr-8"
+          klass="secondary large"
+          title="Cancelar"
+          color="medium"
+          (click)="cancel()"
+        >
+        </app-button>
+        <app-button
+          [load]="loading"
+          form="form-execution"
+          class="w-[200px]"
+          klass="primary large"
+          title="Guardar Ejecución"
+        >
+        </app-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,36 @@
+.sidenav {
+
+
+  .item {
+    ion-icon {
+      pointer-events: none;
+    }
+
+    ion-icon,
+    svg,
+    span {
+      color: var(--ion-color-dark);
+    }
+
+    &.selected {
+      background: rgba(var(--ion-color-primary-rgb), 0.14);
+
+      span {
+        color: var(--ion-color-primary) !important;
+        font-weight: bold;
+      }
+
+      ion-icon {
+        color: var(--ion-color-primary);
+      }
+    }
+  }
+}
+
+.sidemenu-hidden {
+  transform: translateX(-100%);
+}
+
+.sidemenu {
+  transition: transform 300ms;
+}

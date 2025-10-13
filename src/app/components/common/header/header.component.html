@@ -1,0 +1,26 @@
+<header class="sm:relative w-full fixed z-10 flex md:justify-center justify-between items-center select-none px-[30px]"
+  [class]="sideMenuStore.sidemenuValue.show ? 'py-[40px]' : 'py-[20px]'">
+  <div class="w-full flex flex-row  md:justify-between justify-between items-center z-10   absolute top-0 h-full">
+    <div class="w-full flex items-center md:justify-start justify-between pl-0 sm:pl-4 z-10">
+      <ion-buttons (click)="openSideMenu()" class="items-center justify-center flex z-0 sm:ml-5" slot="start">
+        <ion-menu-button autoHide="false" color="primary">
+        </ion-menu-button>
+      </ion-buttons>
+      <!-- *ngIf="!sideMenuStore.sidemenuValue.show"
+      * [class]="title ? 'pointer-events-none' : ''"  -->
+      <div class="items-center  transition-transform ease-out duration-500"
+        [ngClass]="{'-translate-x-[1000px]': !sideMenuStore.sidemenuValue.show}">
+        <h3 *ngIf="title" class="text-lg sm:text-[32px] sm:ml-3 ml-0 font-bold pointer-events-none text-start text-dark"
+          title="">
+          {{ title }}
+        </h3>
+        <ng-content> </ng-content>
+      </div>
+      <p class="text-base sm:text-sm mt-4 text-dark">
+        {{ subtitle }}
+      </p>
+      <!-- <app-profile-dropdown class="flex sm:hidden"></app-profile-dropdown> -->
+    </div>
+    <!-- <app-profile-dropdown class="hidden sm:flex mr-16"></app-profile-dropdown> -->
+  </div>
+</header>

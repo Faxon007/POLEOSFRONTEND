@@ -1,0 +1,18 @@
+<ion-grid>
+	<ion-row *ngIf="options.items.length > 0">
+		<ion-col
+			*ngFor="let option of options.items"
+			size="6"
+			[hidden]="showItem(option.name)"
+		>
+			<ion-item class="text-sm itemCheckbox ion-no-margin ion-no-padding">
+				<ion-checkbox
+					slot="start"
+					[(ngModel)]="option.check"
+					class=""
+				></ion-checkbox>
+				<ion-label>{{ option.name }}</ion-label>
+			</ion-item>
+		</ion-col>
+	</ion-row>
+</ion-grid>

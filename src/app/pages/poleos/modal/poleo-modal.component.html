@@ -1,0 +1,85 @@
+<ion-content>
+	<div class="w-full h-full p-4 bg-light">
+		<div class="flex items-center py-4 flex-col">
+			<div class="flex items-center justify-end w-full">
+				<ion-button (click)="close()" class="close-button" color="medium" shape="round" fill="solid">
+					<ion-icon slot="icon-only" name="close"></ion-icon>
+					<ion-ripple-effect></ion-ripple-effect>
+				</ion-button>
+			</div>
+			<h2 class="text-[32px] font-bold text-primary text-center">
+				{{
+				type === 'create' ? 'Agregar Poleo' : 'Editar poleo'
+				}}
+			</h2>
+		</div>
+		<form #form ngNativeValidate class="px-12 h-auto md:h-[62vh] justify-between flex flex-col" id="form-poleo"
+			(ngSubmit)="form.checkValidity() ? onSumbit() : null">
+			<div class="flex w-full flex-col">
+				
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">País</ion-label>
+					<ion-select [(ngModel)]="poleo.country" name="country" interface="alert"
+						placeholder="Seleccionar país">
+						<ion-select-option value="GT">GT</ion-select-option>
+						<ion-select-option value="SV">SV</ion-select-option>
+						<ion-select-option value="HN">HN</ion-select-option>
+						<ion-select-option value="NI">NI</ion-select-option>
+						<ion-select-option value="CR">CR</ion-select-option>
+						<ion-select-option value="IMS_SIXBEL">IMS_SIXBEL</ion-select-option>
+					</ion-select>
+				</ion-item>
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Titulo</ion-label>
+					<ion-input placeholder="Ingresar el título" required name="title"
+						[(ngModel)]="poleo.title"></ion-input>
+				</ion-item>
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Host</ion-label>
+					<ion-input placeholder="Ingresar host" required name="host" [(ngModel)]="poleo.host"></ion-input>
+				</ion-item>
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Usuario</ion-label>
+					<ion-input placeholder="Ingresar usuario" required name="usuario"
+						[(ngModel)]="poleo.user"></ion-input>
+				</ion-item>
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Constraseña</ion-label>
+					<ion-input placeholder="Ingresar contraseña" required name="password"
+							[(ngModel)]="poleo.password"></ion-input>
+				</ion-item>
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Directorio</ion-label>
+					<ion-input placeholder="Ingresar directorio" required name="directory"
+									[(ngModel)]="poleo.directory"></ion-input>
+				</ion-item>
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Puerto</ion-label>
+					<ion-input type="number" placeholder="Ingresar puerto" required name="port"
+					[(ngModel)]="poleo.port"></ion-input>
+				</ion-item>
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Protocol</ion-label>
+					<ion-select [(ngModel)]="poleo.protocol" name="protocol" interface="alert"
+									placeholder="Seleccionar protocolo">
+						<ion-select-option value="ftp">FTP</ion-select-option>
+						<ion-select-option value="sftp">SFTP</ion-select-option>
+						<ion-select-option value="telnet">TELNET</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</div>
+			<div class="flex md:flex-row flex-col justify-evenly items-center my-12">
+				<app-button class="md:w-[200px] w-full md:mb-0 mb-4" klass="secondary large" title="Cancelar"
+					color="medium" (click)="close()">
+				</app-button>
+				<app-button class="md:w-[200px] w-full" [load]="loading" form="form-poleo" klass="primary large"
+					[title]="
+						type === 'create'
+							? 'Agregar poleo'
+							: 'Guardar cambios'
+					">
+				</app-button>
+			</div>
+		</form>
+	</div>
+</ion-content>

@@ -1,0 +1,65 @@
+<!-- Gestión RPA -->
+<li class="relative sidenav-item" *ngIf="rpa">
+  <a class="item h-[60px] flex items-center px-[1rem] mb-2 rounded-full gap-2 hover:bg-divider cursor-pointer w-[60px]"
+     [class.selected]="isSelected(rpaNav)">
+    <ion-icon class="icon w-full" [name]="isSelected(rpaNav) ? 'hardware-chip' : 'hardware-chip-outline'"></ion-icon>
+  </a>
+
+  <ul *ngIf="sideMenuStore.sidemenuValue.show" class="submenu bg-none z-50">
+    <div class="flex flex-col w-[300px] bg-light p-4 rounded-sm shadow-sm">
+      <h2 class="font-bold text-base text-primary ml-3 mb-4">
+        {{ rpaNav[0].title }}
+      </h2>
+
+      <a *ngFor="let option of rpaSubOptions"
+         class="item flex items-center h-14 px-[1.1rem] mb-2 rounded-full hover:bg-divider cursor-pointer"
+         (click)="selectPage({ url: '/rpa/' + option })">
+        <span class="text-[13px] ml-[1rem]">{{ option | titlecase }}</span>
+      </a>
+    </div>
+  </ul>
+</li>
+
+
+<!-- *gestion reportes -->
+<li class="relative sidenav-item" id="sidenavReportAdmin" *ngIf="administrativeReports">
+  <a class="item h-[60px] min-h-[60px] max-h-[60px] relative overflow-hidden flex flex-row items-center px-[1rem] mb-2 rounded-full gap-2 hover:bg-divider cursor-pointer w-[60px]">
+    <ion-icon class="icon w-full" [name]="'speedometer-outline'"></ion-icon>
+  </a>
+  <ul *ngIf="sideMenuStore.sidemenuValue.show" class="submenu bg-none z-50">
+    <div class="flex flex-col w-[300px] bg-light p-4 rounded-sm shadow-sm">
+      <h2 class="font-bold text-base text-primary ml-3 mb-4">Reportes administrativos</h2>
+      <a
+        *ngFor="let nav of reportAdminNav"
+        class="item relative flex flex-row items-center h-14 px-[1.1rem] mb-2 rounded-full hover:bg-divider cursor-pointer transition duration-100 ease-in-out"
+        (click)="selectPage(nav)"
+        [class.selected]="isSelected(nav?.url)"
+      >
+        <span class="text-[13px] ml-[1rem]">{{ nav.title }}</span>
+      </a>
+    </div>
+  </ul>
+</li>
+
+<!-- *gestion administrativa -->
+<li class="relative sidenav-item" id="sidenavManagement" *ngIf="management">
+  <a class="item h-[60px] min-h-[60px] max-h-[60px] relative overflow-hidden flex flex-row items-center px-[1rem] mb-2 rounded-full gap-2 hover:bg-divider cursor-pointer w-[60px]">
+    <ion-icon class="icon w-full" [name]="'settings-outline'"></ion-icon>
+  </a>
+  <ul *ngIf="sideMenuStore.sidemenuValue.show" class="submenu bg-none z-50">
+    <div class="flex flex-col w-[300px] bg-light p-4 rounded-sm shadow-sm">
+      <h2 class="font-bold text-base text-primary ml-3 mb-4">Gestión administrativa</h2>
+      <a
+        *ngFor="let nav of managementNav"
+        class="item relative flex flex-row items-center h-14 px-[1.1rem] mb-2 rounded-full hover:bg-divider cursor-pointer transition duration-100 ease-in-out"
+        (click)="selectPage(nav)"
+        [class.selected]="isSelected(nav?.url)"
+      >
+        <span class="text-[13px] ml-[1rem]">{{ nav.title }}</span>
+      </a>
+    </div>
+  </ul>
+</li>
+
+<!-- Perfil del usuario -->
+<app-profile-dropdown class="flex"></app-profile-dropdown>

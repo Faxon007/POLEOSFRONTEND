@@ -1,0 +1,48 @@
+<ion-content>
+	<div class="w-full h-full p-4">
+		<div class="flex items-center flex-col">
+			<div class="flex items-center justify-end w-full">
+				<ion-button
+					class="close-button"
+					color="medium"
+					shape="round"
+					fill="solid"
+					(click)="cancel()"
+				>
+					<ion-icon slot="icon-only" name="close"></ion-icon>
+					<ion-ripple-effect></ion-ripple-effect>
+				</ion-button>
+			</div>
+			<h2 class="text-3xl font-bold text-primary text-center">
+				Ejecución manual
+			</h2>
+		</div>
+
+		<div class="accordion" id="accordionExample">
+			<div class="my-4">
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">País</ion-label>
+					<ion-select name="country" interface="alert"
+						placeholder="Seleccionar país">
+						<ion-select-option value="GT">GT</ion-select-option>
+						<ion-select-option value="SV">SV</ion-select-option>
+						<ion-select-option value="HN">HN</ion-select-option>
+						<ion-select-option value="NI">NI</ion-select-option>
+						<ion-select-option value="CR">CR</ion-select-option>
+						<ion-select-option value="IMS_SIXBEL">IMS_SIXBEL</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</div>
+		</div>
+
+		<div class="flex md:flex-row flex-col justify-evenly items-center my-12">
+			<app-button class="md:w-[200px] w-full md:mb-0 mb-4" klass="secondary large" title="Cancelar"
+				color="medium" (click)="cancel()">
+			</app-button>
+			<app-button class="md:w-[200px] w-full" (click)="generate()"
+				[title]="'Generar'
+				">
+			</app-button>
+		</div>
+	</div>
+</ion-content>

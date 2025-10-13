@@ -1,0 +1,65 @@
+<div #button (click)="toggleDropdown()"
+  class="flex items-center justify-between cursor-pointer select-none px-2 rounded-full">
+  <div class="flex bg-primary rounded-full w-10 h-10 items-center justify-center">
+    <span class="text-light dark:text-dark text-[16px]">{{
+      user.name | initialsLetters : 2
+      }}</span>
+  </div>
+  <!-- * desplegable -->
+  <!-- <div class="mx-4 flex-col w-50 m-w-48 sm:flex hidden text-dark">
+    <h2 class="text-[14px] font-bold">{{ user.name }}</h2>
+    <p class="text-[12px]">{{ user.email }}</p>
+  </div> -->
+  <!-- <ion-icon class="text-2xl text-primary sm:block hidden" [name]="open ? 'chevron-up-outline' : 'chevron-down-outline'">
+  </ion-icon> -->
+  <!-- * desplegable -->
+</div>
+
+<div #dropdown *ngIf="open"
+  class="flex flex-col bg-light absolute left-20  h-[470px] min-h-[470px] top-24 w-[324px] p-4 profile-dropdown">
+  <div class="flex flex-col justify-center items-center">
+    <div class="flex bg-primary rounded-full p-2 w-20 h-20 items-center justify-center mt-4">
+      <span class="text-light dark:text-dark text-3xl">{{
+        user.name | initialsLetters : 2
+        }}</span>
+    </div>
+    <div class="flex mx-4 flex-col w-50 m-w-48 justify-center items-center my-4 text-dark">
+      <h2 class="text-[14px] font-bold">{{ user.name }}</h2>
+      <p class="text-[12px]">{{ user.email }}</p>
+    </div>
+  </div>
+  <!--
+		Nota: El siguiente elemento es un botón que activa 
+		el modo oscuro, en caso de implementar el Modo oscuro 
+		descomente esto
+		
+		<div class="flex flex-col items-end p-4 mb-2">
+			<app-toggle-theme></app-toggle-theme> 
+		</div>
+	-->
+  <div class="flex flex-col items-start">
+    <div (mouseover)="handleHoverItem('password')" (mouseleave)="handleHoverItem('')"
+      class="rounded-full p-4 hover:bg-primary-item text-dark hover:text-primary flex items-center w-full mb-2 cursor-pointer"
+      (click)="openChangePasswordModal()">
+      <ion-icon class="text-xl mr-4" slot="start" [name]="
+					hoverItem === 'password' ? 'lock-open' : 'lock-open-outline'
+				">
+      </ion-icon>
+      <span class="text-[12px]">Cambiar contraseña</span>
+    </div>
+    <div (mouseover)="handleHoverItem('help')" (mouseleave)="handleHoverItem('')" (click)="openHelpModal()"
+      class="rounded-full p-4 hover:bg-primary-item text-dark hover:text-primary flex items-center w-full mb-2 cursor-pointer">
+      <ion-icon class="text-2xl mr-4" slot="start" [name]="
+					hoverItem === 'help' ? 'help-circle' : 'help-circle-outline'
+				"></ion-icon>
+      <span class="text-[12px]">Ayuda</span>
+    </div>
+    <div class="flex w-full">
+      <hr class="mx-5 my-4 border-t border-divider w-full" />
+    </div>
+    <div (click)="closeSession()"
+      class="rounded-full p-4 hover:bg-primary-item text-dark hover:text-primary flex items-center justify-center w-full mb-2 cursor-pointer">
+      <span class="text-[12px]">Cerrar sesión</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<li *ngFor="let page of pages; index as i" class="relative sidenav-item w-[60px]" [id]="'sidenavSecEx' + i">
+  <!--* [class]="sideMenuStore.sidemenuValue.show ? 'w-full' : 'w-[60px]'" -->
+  <a (click)="selectPage(page)"
+    class="item h-[60px] min-h-[60px] max-h-[60px] relative overflow-hidden flex flex-row items-center px-[1rem] mb-2 rounded-full gap-2 hover:bg-divider cursor-pointer w-[60px]"
+    data-bs-parent="#show" aria-expanded="false" [class.selected]="isSelected(page)">
+    <!--* [class]="sideMenuStore.sidemenuValue.show ? '' : 'w-full'" -->
+    <ion-icon class="icon w-full" [name]="isSelected(page) ? page.icon : page.icon + '-outline'"></ion-icon>
+    <!-- <div class="flex flex-row items-center justify-between w-full" [class]="
+				sideMenuStore.sidemenuValue.show
+					? 'ease-in-out duration-1000 transition-all'
+					: 'hidden ease-out duration-1000'
+			">
+      <span class="text-[13px]">{{ page.title }}</span>
+      <ion-icon class="icon-chevron transition-all duration-300" *ngIf="page?.children?.length" [name]="
+					page.isOpen ? 'chevron-up-outline' : 'chevron-down-outline'
+				"></ion-icon>
+    </div> -->
+  </a>
+  <ul class="submenu bg-none z-50">
+    <div class="flex w-[300px] items-center bg-light p-4 rounded-sm shadow-sm">
+      <h2 class="font-bold text-base text-primary">{{ page.title }}</h2>
+    </div>
+  </ul>
+</li>

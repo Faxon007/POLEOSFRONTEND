@@ -1,0 +1,33 @@
+<div class="w-full">
+  <app-header title="Reportes"></app-header>
+  <div
+    class="min-h-screen flex-col h-screen px-5 md:px-10 pb-11 mt-[50px] sm:mt-0 w-full flex claro-oym-scroll overflow-x-hidden overflow-y-auto flex-1 scroll-smooth">
+    <section class="w-full flex flex-col">
+      <div class="flex md:flex-row flex-col w-full justify-between items-end md:h-[80px] h-auto">
+
+
+        <div class="flex items-end flex-wrap">
+          <app-search placeholder="Buscar" [(value)]="valueSearchReport" (valueChange)="searchReport()"></app-search>
+          <app-input-search-multiple class="flex md:w-[200px] w-full md:mr-4 mr-0 md:mb-0 mb-3 ml-4" label="Categorias"
+            klass="secondary" klassContent="w-[200px]" [(value)]="selectCategories" [options]="categories"
+            placeholder="Selecciona Categorías" (valueChange)="searchReport()"></app-input-search-multiple>
+        </div>
+
+        <div class="flex md:w-[200px] w-full md:mt-0 mt-8">
+          <app-button (clicked)="openReportModal('create')" class="md:w-[200px] w-full" klass="primary large"
+            title="Agregar reporte"></app-button>
+        </div>
+      </div>
+      <div class="flex"></div>
+    </section>
+    <app-table [rows]="reportService.reportsValue.rows" [columns]="COLUMNS" [listOptions]="LIST_OPTIONS"
+      [total]="reportService.reportsValue.pages" [current]="reportService.currentPage"
+      (changePage)="onChangePage($event)" [count]="reportService.reportsValue.count" [loading]="loading">
+      <ng-template let-row>
+        <!-- <p [class]="row.key === 'url' ? 'sm:w-[250px] md:w-[300px] lg:w-[350px] sm:truncate':''" >{{row.value}}</p> -->
+        <p class="whitespace-pre-wrap">{{row.value}}</p>
+      </ng-template>
+    </app-table>
+  </div>
+  <span>hola</span>
+</div>

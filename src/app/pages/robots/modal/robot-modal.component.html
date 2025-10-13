@@ -1,0 +1,120 @@
+<ion-content>
+	<div class="w-full h-full p-4 bg-light">
+		<div class="flex items-center py-4 flex-col">
+			<div class="flex items-center justify-end w-full">
+				<ion-button
+					(click)="close()"
+					class="close-button"
+					color="medium"
+					shape="round"
+					fill="solid"
+				>
+					<ion-icon slot="icon-only" name="close"></ion-icon>
+					<ion-ripple-effect></ion-ripple-effect>
+				</ion-button>
+			</div>
+			<h2 class="text-[32px] font-bold text-primary text-center">
+				{{
+					type === 'create' ? 'Agregar Robot' : 'Editar robot'
+				}}
+			</h2>
+		</div>
+		<form
+			#form
+			ngNativeValidate
+			class="px-12 h-auto md:h-[62vh] justify-between flex flex-col"
+			id="form-robot"
+			(ngSubmit)="form.checkValidity() ? onSumbit() : null"
+		>
+			<div class="flex w-full flex-col">
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Nombre</ion-label>
+					<ion-input
+						placeholder="Ingresar nombre"
+						required
+						name="name"
+						[(ngModel)]="robot.name"
+					></ion-input>
+				</ion-item>
+				
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Script</ion-label>
+					<ion-input
+						placeholder="Ingresar script de ejecución"
+						required
+						name="script"
+						[(ngModel)]="robot.script"
+					></ion-input>
+				</ion-item>
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+  <ion-label position="stacked">Estado</ion-label>
+  <ion-select
+    placeholder="Seleccionar estado"
+    name="status"
+    [(ngModel)]="robot.status"
+    required
+  >
+    <ion-select-option value="ACTIVO">ACTIVO</ion-select-option>
+    <ion-select-option value="INACTIVO">INACTIVO</ion-select-option>
+  </ion-select>
+</ion-item>
+
+				<ion-item class="claro-oym-input" mode="md" lines="none">
+					<ion-label position="stacked">Descripción</ion-label>
+					<ion-textarea
+						rows="4"
+						placeholder="Ingresar descripción"
+						name="description"
+						[(ngModel)]="robot.description"
+					></ion-textarea>
+				</ion-item>
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+  <ion-label position="stacked">Agregar opción</ion-label>
+  <ion-input
+    placeholder="Ingresar opción"
+    [(ngModel)]="newOption"
+	[ngModelOptions]="{standalone: true}"
+  ></ion-input>
+  <ion-button (click)="addOption()" fill="outline" slot="end">Agregar</ion-button>
+</ion-item>
+
+<!-- Lista de opciones -->
+<div *ngIf="robot.options.length > 0" class="mb-4">
+  <ion-list>
+    <ion-item *ngFor="let option of robot.options; let i = index">
+      <ion-label>{{ option }}</ion-label>
+      <ion-button fill="clear" color="danger" (click)="removeOption(i)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</div>
+
+			</div>
+			<div
+				class="flex md:flex-row flex-col justify-evenly items-center my-12"
+			>
+				<app-button
+					class="md:w-[200px] w-full md:mb-0 mb-4"
+					klass="secondary large"
+					title="Cancelar"
+					color="medium"
+					(click)="close()"
+				>
+				</app-button>
+				<app-button
+					class="md:w-[200px] w-full"
+					[load]="loading"
+					form="form-robot"
+					klass="primary large"
+					[title]="
+						type === 'create'
+							? 'Agregar robot'
+							: 'Guardar cambios'
+					"
+				>
+				</app-button>
+			</div>
+		</form>
+	</div>
+</ion-content>

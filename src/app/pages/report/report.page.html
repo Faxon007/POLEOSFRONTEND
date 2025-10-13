@@ -1,0 +1,30 @@
+<!-- h-screen overflow-y-auto claro-oym-scroll border bg-green-400 -->
+<div class="w-[full] h-screen overflow-y-auto claro-oym-scroll">
+  <app-header class="" [title]="name ? report.name: ''">
+    <ion-breadcrumbs *ngIf="!name" class="text-gray-label claro-oym-breadcrumbs">
+      <ion-breadcrumb class="text-lg sm:text-xl font-bold text-gray-label hover:text-primary"
+        routerLink="/oym-reports">Reportes O&M
+        <span class="text-gray-label" slot="separator">/</span>
+      </ion-breadcrumb>
+      <ion-breadcrumb class="text-lg sm:text-xl font-bold">
+        {{report.name || '---'}}
+      </ion-breadcrumb>
+    </ion-breadcrumbs>
+  </app-header>
+  <div
+    class="min-h-[screen] h-screen px-5 md:px-10 pb-11 mt-[96px] sm:mt-auto w-full flex claro-oym-scroll overflow-x-hidden overflow-y-auto flex-1 scroll-smooth">
+    <ng-container *ngIf="(report.url | safe) as url">
+      <div *ngIf="!url" class="flex flex-col items-center w-full h-full justify-center">
+        <ion-icon class="text-primary text-5xl mb-2" name="cloud-offline-outline"></ion-icon>
+        <h2 class="text-base mb-2">
+          ¡No encontramos ningún resultado!
+        </h2>
+        <p class="text-sm mb-2">Intenta nuevamente</p>
+        <app-button [load]="loading" class="md:w-[200px] w-full md:mb-0 mb-4" (clicked)="getOne(true)"
+          icon="refresh-outline" title="recargar"></app-button>
+      </div>
+      <iframe (load)="onLoad($event)" *ngIf="url" frameborder="0" width="100%" height="100%"
+        class="w-full overflow-hidden block" [src]="url" frameborder="0"></iframe>
+    </ng-container>
+  </div>
+</div>

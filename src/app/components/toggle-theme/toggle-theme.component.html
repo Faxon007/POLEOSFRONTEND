@@ -1,0 +1,8 @@
+<div class="toggle-theme">
+	<input type="checkbox" class="checkbox" id="checkbox" [(ngModel)]="value" (ngModelChange)="darkModeService.toggleDarkTheme($event)"/>
+	<label for="checkbox" class="label">
+    <ion-icon name="moon-outline" class="text-white text-base"></ion-icon>
+    <ion-icon name="sunny-outline" class="text-white text-lg"></ion-icon>
+		<div class="ball"></div>
+	</label>
+</div>

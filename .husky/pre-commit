@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# ir a la raíz del repo (por si el hook corre desde otra carpeta)
+cd "$(git rev-parse --show-toplevel)"
+
+# usa el binario local, sin npx
+./node_modules/.bin/lint-staged

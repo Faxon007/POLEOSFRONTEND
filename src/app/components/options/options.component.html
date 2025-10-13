@@ -1,0 +1,12 @@
+<div class="bg-light w-fit rounded-md absolute right-10 border border-gray-300">
+	<div
+		class="flex items-center hover:bg-red-300 hover:text-red-600 hover:cursor-pointer py-2 pl-4 pr-10 rounded-md"
+		(click)="execute()"
+		*ngFor="let option of options"
+	>
+		<ion-icon name="{{ option.icon }}" class="text-xl mx-4 my-2"></ion-icon>
+		<p>
+			{{ option.title }}
+		</p>
+	</div>
+</div>

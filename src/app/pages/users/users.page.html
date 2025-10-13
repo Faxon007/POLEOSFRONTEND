@@ -1,0 +1,51 @@
+<div class="w-full">
+  <app-header class="" title="Usuarios"></app-header>
+  <div
+    class="min-h-screen flex-col h-screen px-5 md:px-10 pb-11 mt-[50px] sm:mt-0 w-full flex claro-oym-scroll overflow-x-hidden overflow-y-auto flex-1 scroll-smooth">
+    <section class="w-full h-fit flex flex-col">
+      <div
+        class="flex md:flex-row flex-col w-full md:justify-between justify-center md:items-end items-center md:h-[80px] h-auto">
+        <div class="flex md:flex-row flex-col w-full items-end">
+          <app-search [(value)]="search" placeholder="Buscar" (valueChange)="searchUsers($event)"></app-search>
+          <div class="flex md:w-[200px] w-full md:mx-4 mx-0 md:mb-0 mb-3">
+            <app-input-search-multiple class="md:w-[200px] w-full" label="Roles" klass="secondary"
+              klassContent="w-[200px]" [(value)]="roles" [options]="optionsRoles" placeholder="Selecciona roles"
+              (onChange)="filterUsersByRolesOrStatus($event, 'roles')"></app-input-search-multiple>
+          </div>
+          <div class="flex md:w-[200px] w-full md:mr-4 mr-0">
+            <app-input-search-multiple class="md:w-[200px] w-full" label="Estados" klass="secondary"
+              klassContent="w-[200px]" [options]="[{label:'Activo', value:true}, {label:'Dado de Baja', value:false}]"
+              placeholder="Selecciona estados"
+              (onChange)="filterUsersByRolesOrStatus($event, 'status')"></app-input-search-multiple>
+          </div>
+          <!-- <app-search [(value)]="search" placeholder="Buscar" (valueChange)="searchUsers($event)"></app-search> -->
+        </div>
+        <div class="flex md:w-[235px] w-full md:mt-0 mt-8">
+          <app-button (clicked)="createUser()" class="md:w-[235px] w-full" klass="primary large"
+            title="Agregar usuario" *ngIf="isVisible"></app-button>
+        </div>
+      </div>
+    </section>
+    <app-table class="" [rows]="userService.usersValue.rows" [columns]="columns" [listOptions]="listOptions"
+      [total]="userService.usersValue.pages" [current]="userService.currentPage" (changePage)="onChangePage($event)"
+      [count]="userService.usersValue.count" [loading]="loading" [perPage]="limit" [showActions]="isVisible">
+      <ng-template let-row>
+        <div class="flex items-center w-full" *ngIf="row.key === 'name'">
+          <img class="w-[40px] mr-4"
+            [src]="'https://ui-avatars.com/api/?name='+row.value+'&background=random&rounded=true&color=fff&font_size=0.22'"
+            alt="" />
+          <p>{{row.value}}</p>
+        </div>
+
+        <div class="w-full flex items-center" *ngIf="row.key === 'isActive'">
+          <div class="w-[15px] h-[15px] rounded-full mr-2" [ngClass]="row.value ? 'bg-green-500' : 'bg-gray-500'"></div>
+          <p>{{row.value ? 'Activo' : 'Dado de Baja'}}</p>
+        </div>
+
+        <p *ngIf="row.key !== 'name' && row.key !== 'isActive'">
+          {{row.value}}
+        </p>
+      </ng-template>
+    </app-table>
+  </div>
+</div>

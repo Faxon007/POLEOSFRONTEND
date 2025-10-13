@@ -1,0 +1,50 @@
+<ion-content>
+  <div class="w-full h-full p-4 bg-light items-center justify-center flex flex-col">
+    <div class="flex items-center flex-col">
+      <div class="rounded-full w-[116px] h-[116px] flex justify-center items-center" [ngClass]="
+        type === 'activate'
+        ? 'bg-success-item'
+        : 'bg-primary-item'
+				">
+        <ion-icon [name]="
+						type === 'delete' ? 'trash-outline' : 'person-outline'
+					" class="text-7xl" [ngClass]="
+            type === 'activate'
+            ? 'text-success'
+            : 'text-primary'
+					">
+        </ion-icon>
+      </div>
+      <h2 class="text-[32px] font-bold text-primary text-center">
+        {{
+          type === 'activate'
+          ? 'Activar usuario'
+          : 'Dar de baja'
+        }}
+      </h2>
+    </div>
+    <div class="px-24 text-center text-[12px]">
+      <p>{{ message }}</p>
+    </div>
+    <form #form ngNativeValidate id="form-delete-user" (ngSubmit)="form.checkValidity() ? deleteUser() : null"
+      class="flex flex-col justify-center items-center w-full">
+      <ion-item class="claro-oym-input pb-4 text-center w-[50%]" mode="md" lines="none">
+        <ion-label class="text-center w-full flex items-center justify-center m-auto! margin-auto"
+          position="stacked">{{type === 'activate' ? 'No. FAR' : 'No. BAR'}}</ion-label>
+        <ion-input *ngIf="type === 'activate'" placeholder="No. de X digitos" name="far" [(ngModel)]="far" required></ion-input>
+        <ion-input *ngIf="type !== 'activate'" placeholder="No. de X digitos" name="bar" [(ngModel)]="bar" required></ion-input>
+      </ion-item>
+      <div class="flex md:flex-row flex-col mt-8 items-center justify-evenly w-full md:px-20 px-0">
+        <app-button class="md:w-[200px] w-full md:mb-0 mb-4" klass="secondary large" title="Cancelar" color="medium"
+          (click)="cancel()">
+        </app-button>
+        <app-button class="md:w-[200px] w-full" klass="primary large" [title]="
+            type === 'activate'
+            ? 'Activar usuario'
+            : 'Dar de baja'
+            " [load]="loading" form="form-delete-user">
+        </app-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

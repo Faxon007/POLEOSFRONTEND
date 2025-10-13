@@ -1,0 +1,58 @@
+<ion-content class="">
+  <div class="w-full h-full p-4 bg-light">
+    <div class="flex items-center py-4 flex-col">
+      <div class="flex items-center justify-end w-full">
+        <ion-button class="close-button" color="medium" shape="round" fill="solid" (click)="cancel()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-button>
+      </div>
+      <h2 class="text-[32px] font-bold text-primary text-center">
+        {{ type === 'create' ? 'Agregar usuario' : 'Editar usuario' }}
+      </h2>
+    </div>
+    <form #form ngNativeValidate class="px-12 h-auto md:h-[62vh] justify-between flex flex-col" id="form-user"
+      (ngSubmit)="form.checkValidity() ? saveUser() : null">
+      <div class="flex w-full flex-col">
+        <ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input placeholder="Ingresar nombre" [(ngModel)]="user.name" name="name" required></ion-input>
+        </ion-item>
+        <ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+          <ion-label position="stacked">Correo electrónico</ion-label>
+          <ion-input placeholder="Ingresar correo electrónico" [(ngModel)]="user.email" name="email" required
+            type="email"></ion-input>
+        </ion-item>
+        <app-input-autocomplete class="pb-4" label="Rol" [options]="optionsRoles" [(value)]="role"
+          placeholder="Selccionar rol" [search]="role ? role.label : ''" [required]="true"></app-input-autocomplete>
+        <ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+          <ion-label position="stacked">No. FAR</ion-label>
+          <ion-input placeholder="Ingresar no. FAR" [(ngModel)]="user.far" name="noFar" required></ion-input>
+        </ion-item>
+        <app-input-autocomplete class="pb-4" label="Frecuencia para cambiar contraseña"
+          [options]="optionsFrequencyChangePassword" [(value)]="frequencyChangePassword"
+          placeholder="Seleccionar frecuencia" [search]="
+						frequencyChangePassword
+							? frequencyChangePassword.label
+							: ''
+					" [required]="true"></app-input-autocomplete>
+      </div>
+
+      <div class="flex md:flex-row flex-col justify-evenly items-center py-4">
+        <app-button class="md:w-[200px] w-full md:mb-0 mb-4" klass="cancel large text-dark" title="Cancelar"
+          color="medium" (click)="cancel()">
+        </app-button>
+        <app-button class="md:w-[200px] w-full" form="form-user" klass="primary large" [title]="
+						type === 'create'
+							? 'Agregar usuario'
+							: 'Guardar usuario'
+					" [load]="loading">
+        </app-button>
+        <ion-button class="close-button" color="medium" shape="round" fill="solid" (click)="createPdf()" *ngIf="type==='create'">
+          <ion-icon name="download-outline"></ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

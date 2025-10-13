@@ -1,0 +1,53 @@
+<div>
+	<div class="flex font-bold text-normal items-center w-full p-2 text-dark">
+		<h2 *ngIf="title" class="pr-2">{{ title }}</h2>
+		<p *ngIf="length">({{ length }})</p>
+	</div>
+	<div class="flex flex-wrap w-full">
+		<ng-container *ngIf="items.length">
+			<ng-container *ngIf="items | filter : search : 'name' as result">
+				<ion-card
+					*ngFor="let item of result"
+					class="flex flex-col justify-center cursor-pointer sm:w-[49%] md:w-[32%] lg:w-[24%] w-full box-border m-0 p-0 my-2 sm:mr-[1%] mr-0 shadow-sm hover:text-red-700 hover:bg-red-600 hover:bg-opacity-10 bg-white dark:bg-opacity-10"
+					[title]="item?.name"
+				>
+					<ion-card-header
+						class="flex flex-row justify-between items-center relative"
+					>
+						<h6 class="text-base overflow-clip text-dark">
+							{{ item?.name }}
+						</h6>
+						<div
+							style="z-index: 1"
+							class="relative flex justify-center items-center"
+							(click)="clickStars(item)"
+							[title]="
+								item.favorite
+									? 'Eliminar de favoritos'
+									: 'Agregar a favoritos'
+							"
+						>
+							<ion-icon
+								[name]="item.favorite ? 'star' : 'star-outline'"
+								class="text-xl p-1 star"
+							>
+							</ion-icon>
+						</div>
+
+						<div
+							class="absolute left-0 top-0 w-full h-full"
+							(click)="handleClick(item)"
+						></div>
+					</ion-card-header>
+				</ion-card>
+			</ng-container>
+		</ng-container>
+		<div
+			*ngIf="!items.length"
+			class="flex items-center flex-col my-4 text-dark w-full justify-center"
+		>
+			<ion-icon class="text-primary" name="file-tray-outline"></ion-icon>
+			<p class="text-[12px] mt-2">¡No hay elementos!</p>
+		</div>
+	</div>
+</div>

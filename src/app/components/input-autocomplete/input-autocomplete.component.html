@@ -1,0 +1,62 @@
+<div class="claro-oym-dropdown w-full" [class]="klass">
+	<ion-item #inputElem class="" mode="md" lines="none">
+		<ion-label position="stacked">{{ label ? label : '' }}</ion-label>
+		<div class="input hover:cursor-pointer">
+			<ion-input
+				class=""
+				[readonly]="readonly"
+				[placeholder]="placeholder"
+				[type]="type"
+				[name]="name"
+				[(ngModel)]="search"
+				(ionFocus)="onFocus($event)"
+				(ngModelChange)="handleChange($event)"
+				[required]="required"
+			>
+			</ion-input>
+			<span class="icon cursor-pointer" item-end>
+				<ion-icon
+					[name]="
+						!open ? 'chevron-down-outline' : 'chevron-up-outline'
+					"
+				></ion-icon>
+			</span>
+		</div>
+	</ion-item>
+
+	<div *ngIf="open" class="flex flex-col items" [ngClass]="klassContent">
+		<ng-container *ngIf="options | filter : search : 'label' as result">
+			<div
+				[hidden]="!result.length"
+				class="flex h-[44px] hover:bg-primary-item items-center p-2 hover:cursor-pointer"
+				(click)="selectOption(option)"
+				*ngFor="let option of result"
+				[class]="selectedOption(option) ? 'bg-primary-item' : ''"
+			>
+				<p class="text-[12px]">{{ option.label }}</p>
+			</div>
+			<div
+				*ngIf="!result.length"
+				class="flex justify-center items-center p-2 flex-col"
+			>
+				<ion-icon
+					class="text-primary mb-2 text-3xl"
+					name="search-outline"
+				></ion-icon>
+				<p class="text-[12px] text-center">
+					¡No se encontraron resultados!
+				</p>
+			</div>
+		</ng-container>
+		<div
+			*ngIf="!options.length"
+			class="flex justify-center items-center p-8 flex-col"
+		>
+			<ion-icon
+				class="text-primary mb-2 text-3xl"
+				name="sad-outline"
+			></ion-icon>
+			<p class="text-[13px]">¡No hay opciones!</p>
+		</div>
+	</div>
+</div>

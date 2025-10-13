@@ -1,0 +1,20 @@
+<div class="w-full">
+  <app-header class="" title="Control de desarrollo"></app-header>
+  <div
+    class="min-h-screen flex-col h-screen p-5 md:px-10 pb-11 mt-[50px] sm:mt-0 w-full flex claro-oym-scroll overflow-x-hidden overflow-y-auto flex-1 scroll-smooth">
+    <section class="w-full flex flex-col">
+      <div class="flex md:flex-row flex-col w-full justify-between items-end md:h-[80px] h-auto">
+        <app-search placeholder="Buscar"></app-search>
+        <div class="flex md:w-[200px] w-full md:mt-0 mt-8">
+          <app-button (clicked)="openReportModal()" class="md:w-[200px] w-full" klass="primary large"
+            title="Agregar reporte"></app-button>
+        </div>
+      </div>
+      <div class="flex"></div>
+    </section>
+    <app-table [rows]="controlDevelopmentService.controlDevelopmentValue.rows" [columns]="columns"
+      [listOptions]="listOptions" [total]="controlDevelopmentService.controlDevelopmentValue.pages" [current]="1"
+      (changePage)="onChangePage($event)" [count]="controlDevelopmentService.controlDevelopmentValue.count"
+      [loading]="loading"></app-table>
+  </div>
+</div>

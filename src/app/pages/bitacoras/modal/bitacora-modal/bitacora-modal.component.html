@@ -1,0 +1,82 @@
+<ion-content>
+  <div class="w-full h-full p-4 bg-light">
+
+    <div class="flex items-center py-4 flex-col">
+      <div class="flex items-center justify-end w-full">
+        <ion-button class="close-button" color="medium" shape="round" fill="solid" (click)="cancel()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-button>
+      </div>
+      <h2 class="text-[28px] font-bold text-primary text-center">
+        Bitácora - Detalle
+      </h2>
+    </div>
+
+    <div class="px-6">
+      <ion-item lines="none">
+        <ion-label position="stacked">Opción</ion-label>
+        <ion-input [value]="bitacora.option" readonly></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Acción</ion-label>
+        <ion-input [value]="bitacora.action" readonly></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Usuario</ion-label>
+        <ion-input [value]="bitacora.user" readonly></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Fecha de Ejecución</ion-label>
+        <ion-input [value]="getFormattedDate(bitacora.dateexec)" readonly></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Fecha de Creación</ion-label>
+        <ion-input [value]="getFormattedDate(bitacora.createdAt)" readonly></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Mensaje</ion-label>
+        <ion-textarea [value]="bitacora.message" auto-grow="true" readonly></ion-textarea>
+      </ion-item>
+    </div>
+
+
+    <div class="px-6 mt-6">
+      <ion-label class="font-bold">Objeto Anterior</ion-label>
+      <pre class="bg-gray-100 p-3 rounded text-sm">{{ oldObj | json }}</pre>
+
+      <ion-label class="font-bold mt-4">Objeto Nuevo</ion-label>
+      <pre class="bg-gray-100 p-3 rounded text-sm">{{ newObj | json }}</pre>
+    </div>
+
+    <div class="px-6 mt-6" *ngIf="changes.length > 0">
+      <ion-label class="font-bold">Cambios Realizados</ion-label>
+      <table class="w-full border mt-2 text-sm">
+        <thead>
+          <tr>
+            <th class="border px-2 py-1">Campo</th>
+            <th class="border px-2 py-1">Valor Anterior</th>
+            <th class="border px-2 py-1">Valor Nuevo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of changes">
+            <td class="border px-2 py-1">{{ c.field }}</td>
+            <td class="border px-2 py-1">{{ c.oldValue }}</td>
+            <td class="border px-2 py-1">{{ c.newValue }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="flex justify-center mt-6">
+      <ion-button color="medium" (click)="cancel()">Cerrar</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,24 @@
+import { Injectable } from '@angular/core';
+import { GeneralHttp } from '../common/generalHttp';
+import { AuthStore } from '../../../app/utils/auth';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LogService {
+  constructor(
+    private generalHttp: GeneralHttp,
+    private auth: AuthStore
+  ) {}
+
+  registrarLog(mensaje: string) {
+    const log = {
+      fecha: new Date().toISOString(),
+      usuario: this.auth.user?.name || 'Usuario no identificado',
+      mensaje,
+    };
+
+    // usa el endpoint de tu backend: "logs"
+    return this.generalHttp.create('logs', log, 'Log', false);
+  }
+}

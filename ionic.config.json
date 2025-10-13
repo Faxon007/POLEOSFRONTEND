@@ -1,0 +1,7 @@
+{
+	"name": "claro-oym-portal-poleos-frontend",
+	"integrations": {
+		"capacitor": {}
+	},
+	"type": "angular"
+}

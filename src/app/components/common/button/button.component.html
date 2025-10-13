@@ -1,0 +1,68 @@
+<ion-button
+	*ngIf="form && !fileBtn"
+	[form]="form"
+	[disabled]="load || disabled"
+	expand="block"
+	[ngClass]="klass"
+	class="ion-activatable ripple-parent"
+	type="submit"
+>
+	<ion-icon
+		[ngClass]="{ 'icon-button': !title ? true : false }"
+		size="small"
+		slot="icon-only"
+		*ngIf="icon && !load"
+		[name]="!load ? icon : ''"
+		[src]="!load ? icon : ''"
+	></ion-icon>
+	<ion-icon
+		[ngClass]="{ 'icon-button': !title ? true : false }"
+		size="small"
+		slot="icon-only"
+		*ngIf="load"
+		[src]="load ? 'assets/icon/loading.svg' : ''"
+	></ion-icon>
+	<span *ngIf="!load">{{ title }}</span>
+	<ion-ripple-effect></ion-ripple-effect>
+</ion-button>
+
+<ion-button
+	*ngIf="!form && !fileBtn"
+	(click)="clicked.emit()"
+	[disabled]="load"
+	[disabled]="disabled"
+	expand="block"
+	[ngClass]="klass"
+	class="ion-activatable ripple-parent"
+	color="{{ color }}"
+>
+	<ion-icon
+		[ngClass]="{ 'icon-button': !title ? true : false }"
+		size="small"
+		slot="icon-only"
+		*ngIf="icon && !load"
+		[name]="!load ? icon : ''"
+		[src]="!load ? icon : ''"
+	></ion-icon>
+	<ion-icon
+		[ngClass]="{ 'icon-button': !title ? true : false }"
+		size="small"
+		slot="icon-only"
+		*ngIf="load"
+		[src]="load ? 'assets/icon/loading.svg' : ''"
+	></ion-icon>
+	<span *ngIf="!load">{{ title }}</span>
+	<ion-ripple-effect></ion-ripple-effect>
+</ion-button>
+
+<div class="file-btn" *ngIf="fileBtn">
+	<label for="file-upload" class="custom-file-upload">
+		{{ title }}
+	</label>
+	<input
+		id="file-upload"
+		type="file"
+		[accept]="accept"
+		(change)="handleFileInput($event)"
+	/>
+</div>

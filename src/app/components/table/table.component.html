@@ -1,0 +1,74 @@
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8 mb-12">
+      <div class="overflow-x-auto">
+        <table *ngIf="columns?.length" class="min-w-full">
+          <thead class="">
+            <tr>
+              <th *ngFor="let column of columns" scope="col"
+                class="text-sm font-bold px-6 py-4 text-left text-dark" [class]="column?.klass">
+                {{ column?.label }}
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngIf="!loading" class="bg-light rounded-[5px]">
+            <tr class="border-b dark:border-b-light-tint text-[12px] text-dark transition duration-300 ease-in-out hover:text-primary!"
+              *ngFor="let row of rows">
+              <td class="font-light px-6 py-1 whitespace-nowrap" *ngFor="let column of columns" [class]="column?.klass">
+                <ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{
+										$implicit: {
+											value: getValue(row, column.field),
+											key: column.field
+										}
+									}">
+                  <!-- <p
+                    *ngIf="
+                      column.field !== 'actions' && column.field !== 'component'
+                    "
+                  >
+                    {{ getValue(row, column.field) || "" }}
+                  </p> -->
+                </ng-template>
+
+                <ion-button (click)="presentPopover(row, $event)" class="actions-button"
+                  *ngIf="column.field === 'actions' && showActions" color="dark" shape="round" fill="clear">
+                  <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+                  <ion-ripple-effect></ion-ripple-effect>
+                </ion-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="loading" class="flex items-center w-full justify-center md:h-[600px] h-[200px] mt-8">
+          <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"
+            stroke="var(--ion-color-dark)">
+            <g fill="none" fill-rule="evenodd">
+              <g transform="translate(1 1)" stroke-width="2">
+                <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+                <path d="M36 18c0-9.94-8.06-18-18-18">
+                  <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s"
+                    repeatCount="indefinite" />
+                </path>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <div *ngIf="rows.length && !loading"
+          class="flex px-6 my-8 pt-1 pb-6 md:items-center items-start md:justify-between justify-start md:flex-row flex-col">
+          <p class="text-[12px] text-gray-label md:p-0 py-4">
+            Mostrando
+            {{
+            total === current ? count : current * perPage || 0
+            }}
+            de
+            {{ count }}
+          </p>
+          <app-pagination [current]="current" [total]="total" (goTo)="onGoTo($event)" (next)="onNext($event)"
+            (previous)="onPrevious($event)"></app-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="claro-oym-dropdown w-full" [class]="klass">
+	<ion-item #inputElem class="" mode="md" lines="none">
+		<ion-label position="stacked">{{ label ? label : '' }}</ion-label>
+		<div class="input hover:cursor-pointer">
+			<ion-input
+				[readonly]="readonly"
+				[placeholder]="textDisplay"
+				[type]="type"
+				[name]="name"
+				[(ngModel)]="search"
+				(ngModelChange)="handleChange($event)"
+				[required]="required"
+				(ionFocus)="onFocus($event)"
+			>
+			</ion-input>
+			<span class="icon cursor-pointer" item-end>
+				<ion-icon
+					[name]="
+						!open ? 'chevron-down-outline' : 'chevron-up-outline'
+					"
+				></ion-icon>
+			</span>
+		</div>
+	</ion-item>
+
+	<div *ngIf="open" class="flex flex-col items" [ngClass]="klassContent">
+		<ng-container *ngIf="options | filter : search : 'label' as result">
+			<div
+				[hidden]="!options.length"
+				class="flex h-[44px] hover:bg-primary-item items-center p-2 hover:cursor-pointer"
+				(click)="selectOption(option)"
+				*ngFor="let option of result"
+				[class]="selectedOption(option) ? 'bg-primary-item' : ''"
+			>
+				<ion-icon
+					class="text-[13px] mr-2"
+					[class]="
+						selectedOption(option)
+							? 'text-primary'
+							: 'text-medium-shade'
+					"
+					name="square"
+				></ion-icon>
+				<p class="text-[12px] text-dark">{{ option.label }}</p>
+			</div>
+			<div
+				*ngIf="!result.length"
+				class="flex justify-center items-center p-2 flex-col"
+			>
+				<ion-icon
+					class="text-primary mb-2 text-3xl"
+					name="search-outline"
+				></ion-icon>
+				<p class="text-[12px] text-center text-dark">
+					¡No se encontraron resultados!
+				</p>
+			</div>
+			<div
+				[hidden]="!result.length"
+				(click)="selectAll()"
+				class="flex h-[44px] hover:text-primary hover:font-bold items-center p-2 hover:cursor-pointer justify-center"
+			>
+				<p class="text-[12px] text-dark">
+					{{
+						value.length === options.length
+							? 'Deseleccionar todos'
+							: 'Seleccionar todos'
+					}}
+				</p>
+			</div>
+		</ng-container>
+		<div
+			*ngIf="!options.length"
+			class="flex justify-center items-center p-8 flex-col"
+		>
+			<ion-icon
+				class="text-primary mb-2 text-3xl"
+				name="sad-outline"
+			></ion-icon>
+			<p class="text-[13px]">¡No hay opciones!</p>
+		</div>
+	</div>
+</div>

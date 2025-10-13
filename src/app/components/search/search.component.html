@@ -1,0 +1,9 @@
+<ion-searchbar
+	[class]="class"
+	class="search-input z-0"
+	[(ngModel)]="value"
+	(ngModelChange)="handleChange($event)"
+	[placeholder]="placeholder"
+	mode="ios"
+	debounce="500"
+></ion-searchbar>

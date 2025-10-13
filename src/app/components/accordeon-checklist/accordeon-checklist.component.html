@@ -1,0 +1,43 @@
+<div class="accordion" id="accordionExample">
+	<div
+		class="accordion-item bg-white"
+		*ngFor="let option of options; let i = index"
+	>
+		<h2
+			class="accordion-header mb-0 border border-white"
+			id="heading{{ i }}"
+			*ngIf="option.items.length > 0"
+		>
+			<button
+				class="accordion-button collapsed relative flex items-center w-full py-2 text-base text-gray-800 text-left bg-white border-none rounded-none transition focus:outline-none"
+				type="button"
+				data-bs-toggle="collapse"
+				attr.data-bs-target="#collapse{{ i }}"
+				aria-expanded="false"
+				attr.aria-controls="collapse{{ i }}"
+				(click)="changeAccordion(option.id)"
+			>
+				<p class="text-black font-extrabold">{{ option.name }}</p>
+				<ion-icon
+					[name]="
+						idSelectedAccordion === option.id
+							? 'chevron-up-outline'
+							: 'chevron-down-outline'
+					"
+					class="absolute right-0 text-xl ico"
+				></ion-icon>
+			</button>
+		</h2>
+		<div
+			id="collapse{{ i }}"
+			class="accordion-collapse collapse"
+			attr.aria-labelledby="heading{{ i }}"
+			data-bs-parent="#accordionExample"
+		>
+			<div class="accordion-body mb-3">
+				<app-checkbox-list [options]="option"></app-checkbox-list>
+			</div>
+		</div>
+	</div>
+	<div class="w-full bg-red-300 h-px"></div>
+</div>

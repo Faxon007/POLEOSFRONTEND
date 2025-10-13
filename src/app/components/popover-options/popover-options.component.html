@@ -1,0 +1,16 @@
+<ion-item
+	button
+	lines="none"
+	*ngFor="let item of options"
+	(click)="setEvent(item.event)"
+>
+	<div class="container">
+		<div class="icon round">
+			<ion-icon [name]="item.icon"></ion-icon>
+		</div>
+		<div class="title">
+			<p>{{ item.title }}</p>
+			<span *ngIf="item.subtitle">{{ item.subtitle }}</span>
+		</div>
+	</div>
+</ion-item>

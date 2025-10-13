@@ -1,0 +1,166 @@
+<ion-content>
+	<div class="w-full h-full p-4">
+		<div class="flex items-center flex-col">
+			<div class="flex items-center justify-end w-full">
+				<ion-button
+					class="close-button"
+					color="medium"
+					shape="round"
+					fill="solid"
+					(click)="cancel()"
+				>
+					<ion-icon slot="icon-only" name="close"></ion-icon>
+					<ion-ripple-effect></ion-ripple-effect>
+				</ion-button>
+			</div>
+			<h2 class="text-3xl font-bold text-primary text-center">
+				{{ type == 'create' ? 'Crear' : 'Editar' }} rol
+			</h2>
+		</div>
+
+		<form
+			#form
+			ngNativeValidate
+			class="px-8"
+			id="form-rol"
+			(ngSubmit)="form.checkValidity() ? saveRol() : null"
+		>
+			<ion-item class="claro-oym-input pb-8" mode="md" lines="none">
+				<ion-label position="stacked">Nombre de rol</ion-label>
+				<ion-input
+					placeholder="Ingresar nombre"
+					name="name"
+					[(ngModel)]="rol.name"
+					required
+				></ion-input>
+			</ion-item>
+
+			<div class="accordion" id="accordionExample" hidden>
+				<div class="my-4">
+					<div>
+						<p class="text-xl font-bold">Selecciona reportes</p>
+						<p class="text-gray-400 text-sm">
+							Escriba el nombre del reporte que desea buscar,
+							también puede escribir la categoría a la que
+							pertenece
+						</p>
+					</div>
+					<app-search
+						class="bg"
+						placeholder="Buscar"
+						[(value)]="valueSearch"
+					></app-search>
+				</div>
+
+				<div
+					class="accordion-item bg-transparent"
+					*ngFor="let option of options; let i = index"
+					[hidden]="validateCategorie(option)"
+				>
+					<h2
+						class="accordion-header mb-0 border border-transparent"
+						id="heading{{ i }}"
+						*ngIf="option.items.length > 0"
+					>
+						<button
+							class="accordion-button collapsed relative flex items-center w-full py-2 text-base text-left bg-transparent border-none rounded-none transition focus:outline-none"
+							type="button"
+							data-bs-toggle="collapse"
+							attr.data-bs-target="#collapse{{ i }}"
+							aria-expanded="false"
+							attr.aria-controls="collapse{{ i }}"
+							(click)="changeAccordion(option.id)"
+						>
+							<p class="font-extrabold text-dark">
+								{{ option.name }}
+							</p>
+							<ion-icon
+								[name]="
+									idSelectedAccordion === option.id
+										? 'chevron-up-outline'
+										: 'chevron-down-outline'
+								"
+								class="absolute right-0 text-xl ico"
+							></ion-icon>
+						</button>
+					</h2>
+
+					<div
+						id="collapse{{ i }}"
+						class="accordion-collapse collapse"
+						attr.aria-labelledby="heading{{ i }}"
+						data-bs-parent="#accordionExample"
+					>
+						<div class="accordion-body mb-3">
+							<app-checkbox-list
+								[options]="option"
+								[FindInput]="valueSearch"
+							></app-checkbox-list>
+						</div>
+					</div>
+				</div>
+				<div class="w-full bg-red-300 h-px my-5"></div>
+			</div>
+
+			<ion-item class="text-sm itemCheckbox">
+				<ion-checkbox
+					slot="start"
+					[(ngModel)]="rol.permissions.administrativeReports"
+					name="reports"
+				></ion-checkbox>
+				<ion-label>Reportes administrativos</ion-label>
+			</ion-item>
+
+			<ion-item class="text-sm itemCheckbox">
+				<ion-checkbox
+					slot="start"
+					[(ngModel)]="rol.permissions.management"
+					name="management"
+				></ion-checkbox>
+				<ion-label>Gestión administrativa</ion-label>
+			</ion-item>
+
+			<ion-item class="text-sm itemCheckbox">
+				<ion-checkbox
+					slot="start"
+					[(ngModel)]="rol.permissions.rpa"
+					name="rpa"
+				></ion-checkbox>
+				<ion-label>Gestión RPAs</ion-label>
+			</ion-item>
+
+			<!-- 🔹 Permisos por robot -->
+			<div class="mt-6">
+				<h3 class="text-lg font-bold">Permisos por robot</h3>
+				<div *ngFor="let robot of robots" class="mt-2">
+					<h4 class="font-semibold">{{ robot.name }}</h4>
+					<ion-item *ngFor="let option of robot.options">
+						<ion-label>{{ option }}</ion-label>
+						<ion-checkbox
+							slot="start"
+							[checked]="rol.permissions.robotPermissions[robot.name]?.includes(option)"
+							(ionChange)="toggleRobotOption(robot.name, option, $any($event).detail.checked)">
+						</ion-checkbox>
+					</ion-item>
+				</div>
+			</div>
+
+			<div class="flex mt-8 items-center justify-evenly pb-4">
+				<app-button
+					class="w-[200px] mr-8"
+					klass="secondary large"
+					title="Cancelar"
+					color="medium"
+					(click)="cancel()"
+				></app-button>
+				<app-button
+					[load]="loading"
+					form="form-rol"
+					class="w-[200px]"
+					klass="primary large"
+					title="Guardar rol"
+				></app-button>
+			</div>
+		</form>
+	</div>
+</ion-content>

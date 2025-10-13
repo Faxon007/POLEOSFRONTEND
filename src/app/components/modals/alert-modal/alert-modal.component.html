@@ -1,0 +1,25 @@
+<ion-content>
+  <div class="w-full h-full p-4 bg-light items-center justify-center flex flex-col">
+    <div *ngIf="icon" class="p-4 rounded-full w-[116px] h-[116px] flex justify-center items-center" [class]="klassIcon">
+      <ion-icon [name]="icon" class="text-7xl"> </ion-icon>
+    </div>
+    <div class="text-center text-[12px] mt-8 mb-12">
+      <h2 class="text-[32px] font-bold text-primary text-center mb-4">
+        {{ title }}
+      </h2>
+      <p class="whitespace-pre-wrap">{{ message }}</p>
+      <a *ngIf="secondMessage" class="flex w-full justify-center hover:text-primary" [href]="downloadPath" download>
+        <p class="whitespace-pre-wrap">{{secondMessage}}</p>
+        <ion-icon [name]="secondIcon" class="text-sm"></ion-icon>
+      </a>
+    </div>
+    <div class="flex md:flex-row flex-col mt-8 items-center justify-evenly w-full md:px-20 px-0">
+      <app-button *ngIf="showCancelButton" class="md:w-[200px] w-full md:mb-0 mb-4" [klass]="klassCancelButton"
+        [title]="titleCancelButton" color="medium" (click)="cancel()">
+      </app-button>
+      <app-button *ngIf="showButton" class="md:w-[200px] w-full" [klass]="klassButton" [title]="titleButton"
+        (click)="onClick()" [load]="loading">
+      </app-button>
+    </div>
+  </div>
+</ion-content>

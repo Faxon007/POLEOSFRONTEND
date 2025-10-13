@@ -1,0 +1,75 @@
+<ion-content>
+	<div class="w-full h-full p-4 bg-light">
+		<div class="flex items-center py-4 flex-col">
+			<div class="flex items-center justify-end w-full">
+				<ion-button
+					(click)="close()"
+					class="close-button"
+					color="medium"
+					shape="round"
+					fill="solid"
+				>
+					<ion-icon slot="icon-only" name="close"></ion-icon>
+					<ion-ripple-effect></ion-ripple-effect>
+				</ion-button>
+			</div>
+			<h2 class="text-[32px] font-bold text-primary text-center">
+				{{
+					type === 'create' ? 'Agregar categoría' : 'Editar categoría'
+				}}
+			</h2>
+		</div>
+		<form
+			#form
+			ngNativeValidate
+			class="px-12 h-auto md:h-[62vh] justify-between flex flex-col"
+			id="form-category"
+			(ngSubmit)="form.checkValidity() ? onSumbit() : null"
+		>
+			<div class="flex w-full flex-col">
+				<ion-item class="claro-oym-input pb-4" mode="md" lines="none">
+					<ion-label position="stacked">Nombre</ion-label>
+					<ion-input
+						placeholder="Ingresar nombre"
+						required
+						name="name"
+						[(ngModel)]="category.name"
+					></ion-input>
+				</ion-item>
+				<ion-item class="claro-oym-input" mode="md" lines="none">
+					<ion-label position="stacked">Descripción</ion-label>
+					<ion-textarea
+						rows="8"
+						placeholder="Ingresar descripción"
+						name="description"
+						[(ngModel)]="category.description"
+					></ion-textarea>
+				</ion-item>
+			</div>
+			<div
+				class="flex md:flex-row flex-col justify-evenly items-center my-12"
+			>
+				<app-button
+					class="md:w-[200px] w-full md:mb-0 mb-4"
+					klass="secondary large"
+					title="Cancelar"
+					color="medium"
+					(click)="close()"
+				>
+				</app-button>
+				<app-button
+					class="md:w-[200px] w-full"
+					[load]="loading"
+					form="form-category"
+					klass="primary large"
+					[title]="
+						type === 'create'
+							? 'Agregar categoría'
+							: 'Guardar cambios'
+					"
+				>
+				</app-button>
+			</div>
+		</form>
+	</div>
+</ion-content>

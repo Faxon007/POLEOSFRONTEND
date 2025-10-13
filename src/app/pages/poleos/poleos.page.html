@@ -1,0 +1,31 @@
+<div class="w-full">
+  <app-header title="Poleos"></app-header>
+  <div
+    class="min-h-screen flex-col h-screen px-5 md:px-10 pb-11 mt-[50px] sm:mt-0 w-full flex claro-oym-scroll overflow-x-hidden overflow-y-auto flex-1 scroll-smooth">
+    <section class="w-full flex flex-col">
+      <div class="flex md:flex-row flex-col w-full justify-between items-end md:h-[80px] h-auto">
+
+
+        <div class="flex items-end flex-wrap">
+          <app-search [(value)]="search" placeholder="Buscar" (valueChange)="searchPoleo($event)"></app-search>
+        </div>
+
+        <div class="flex md:w-[200px] w-full md:mt-0 mt-8">
+          <app-button (clicked)="openPoleoModal('create')" class="md:w-[200px] w-full" klass="primary large"
+            title="Agregar poleo"></app-button>
+        </div>
+      </div>
+      <div class="flex"></div>
+    </section>
+    <app-table [rows]="poleoService.poleosValue.rows" [columns]="COLUMNS" [listOptions]="LIST_OPTIONS"
+      [total]="poleoService.poleosValue.pages" [current]="poleoService.currentPage"
+      (changePage)="onChangePage($event)" [count]="poleoService.poleosValue.count" [loading]="loading">
+      <ng-template let-row>
+        <!-- <p [class]="row.key === 'url' ? 'sm:w-[250px] md:w-[300px] lg:w-[350px] sm:truncate':''" >{{row.value}}</p> -->
+				
+        <p class="whitespace-pre-wrap">{{row.value}}</p>
+      </ng-template>
+    </app-table>
+  </div>
+  <span>hola</span>
+</div>
