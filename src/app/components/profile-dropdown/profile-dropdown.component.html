@@ -38,15 +38,20 @@
 		</div>
 	-->
   <div class="flex flex-col items-start">
-    <div (mouseover)="handleHoverItem('password')" (mouseleave)="handleHoverItem('')"
-      class="rounded-full p-4 hover:bg-primary-item text-dark hover:text-primary flex items-center w-full mb-2 cursor-pointer"
-      (click)="openChangePasswordModal()">
-      <ion-icon class="text-xl mr-4" slot="start" [name]="
-					hoverItem === 'password' ? 'lock-open' : 'lock-open-outline'
-				">
-      </ion-icon>
-      <span class="text-[12px]">Cambiar contraseña</span>
-    </div>
+    <div
+  (mouseover)="handleHoverItem('controller')"
+  (mouseleave)="handleHoverItem('')"
+  (click)="goBackToController()"
+  class="rounded-full p-4 hover:bg-primary-item text-dark hover:text-primary flex items-center w-full mb-2 cursor-pointer"
+>
+  <ion-icon
+    class="text-xl mr-4"
+    slot="start"
+    [name]="hoverItem === 'controller' ? 'arrow-back' : 'arrow-back-outline'"
+  ></ion-icon>
+  <span class="text-[12px]">Regresar al Controller</span>
+</div>
+
     <div (mouseover)="handleHoverItem('help')" (mouseleave)="handleHoverItem('')" (click)="openHelpModal()"
       class="rounded-full p-4 hover:bg-primary-item text-dark hover:text-primary flex items-center w-full mb-2 cursor-pointer">
       <ion-icon class="text-2xl mr-4" slot="start" [name]="

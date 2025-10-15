@@ -11,6 +11,7 @@ import { AuthStore } from 'src/app/utils/auth'
 import { ChangePasswordModalComponent } from 'src/app/pages/users/modal/change-password-modal/change-password-modal.component'
 import { ModalController } from '@ionic/angular'
 import { AlertModalComponent } from '../modals/alert-modal/alert-modal.component'
+import { environment } from 'src/environments/environment'
 
 @Component({
 	selector: 'app-profile-dropdown',
@@ -73,6 +74,18 @@ export class ProfileDropdownComponent implements OnInit {
 		})
 		await modal.present()
 	}
+
+	goBackToController() {
+  const session = {
+    token: this.auth.token,
+    isAuthenticated: true,
+    user: this.user,
+  };
+
+  const encodedSession = encodeURIComponent(JSON.stringify(session));
+  window.location.href = `${environment.controllerFrontUrl}?session=${encodedSession}`;
+}
+
 
 	async openHelpModal() {
 		// console.log('clicked')
