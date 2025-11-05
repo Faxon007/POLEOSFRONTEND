@@ -15,13 +15,13 @@ export class AppComponent implements OnInit {
     const urlParams = new URLSearchParams(window.location.search);
     const sessionParam = urlParams.get('session');
     const pathParam = urlParams.get('path');
+    const openModal = urlParams.get('openModal');
 
     if (sessionParam) {
       try {
         // Decodificar y guardar la sesión completa en localStorage
         const session = JSON.parse(decodeURIComponent(sessionParam));
         localStorage.setItem('session', JSON.stringify(session));
-
         // Redirigir a la ruta enviada
         if (pathParam) {
           this.router.navigateByUrl(pathParam);
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
         const existingSession = JSON.parse(existingSessionStr);
         if (existingSession?.token) {
           // Redirigir a la ruta guardada o a dashboard por defecto
-          const defaultPath = pathParam || '/dashboard';
+          const defaultPath = pathParam || '/login';
           this.router.navigateByUrl(defaultPath);
         } else {
           this.router.navigate(['/login']);

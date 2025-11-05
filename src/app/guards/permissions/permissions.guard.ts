@@ -22,6 +22,7 @@ export class PermissionsGuard implements CanActivateChild {
 		const url = state.url.split('/').filter((element) => element !== '');
 		const user = this.authStore.user;
 		const permissions = user.role?.permissions;
+		const poleo = user.role?.permissions;
 		console.log('Guard ejecupermissions tado en:', permissions);
 
 		// Permiso para oym-reports

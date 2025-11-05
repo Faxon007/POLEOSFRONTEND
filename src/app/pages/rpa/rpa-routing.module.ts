@@ -23,10 +23,10 @@ const routes: Routes = [
 					),
 			},
 			{
-				path: 'atp',
+				path: 'reports-oym',
 				loadChildren: () =>
-					import('../atp/atp.module').then(
-						(m) => m.AtpPageModule
+					import('../reports-oym/reports-oym.module').then(
+						(m) => m.ReportsOymPageModule
 					),
 			},
 			{

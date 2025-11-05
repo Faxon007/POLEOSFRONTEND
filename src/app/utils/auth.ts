@@ -18,6 +18,11 @@ export class AuthStore {
 		const session: any = localStorage?.getItem('session')
 			? localStorage.getItem('session')
 			: null
+
+			const openModal: any = localStorage?.getItem('openModal')
+			? localStorage.getItem('openModal')
+			: null
+console.log('openModal componenet ',openModal)
 		this.authSubject = new BehaviorSubject<IAuth>(
 			JSON.parse(session) ?? initialState
 		)

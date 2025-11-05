@@ -65,4 +65,7 @@ export class SidemenuComponent implements OnInit {
 			)
 		}
 	}
+	goToReports() {
+  window.location.href = 'http://localhost:4300/oym-reports';
+}
 }
