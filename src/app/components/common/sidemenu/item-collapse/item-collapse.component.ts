@@ -69,9 +69,11 @@ export class ItemCollapseComponent implements OnInit {
       // Generar subopciones dinámicas según permisos de robots
       const robotPermissions = user?.role?.permissions.robotPermissions ?? {};
       const subOptions: string[] = [];
+      const opcionesProhibidas = ['reports-oym', 'atp', 'executions2'];
       Object.keys(robotPermissions).forEach((key) => {
         robotPermissions[key].forEach((opt) => {
-          if (!subOptions.includes(opt)) subOptions.push(opt);
+          console.log('permisos 4200 ',key,opt);//aqui se arma el menu dinamico LDMR
+          if (!subOptions.includes(opt) && !opcionesProhibidas.includes(opt)) subOptions.push(opt);
         });
       });
       this.rpaSubOptions = subOptions;
